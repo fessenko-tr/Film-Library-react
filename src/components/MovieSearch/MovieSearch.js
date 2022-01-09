@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import TMDBFetcher from "../../api/tmdbApi";
 import useStatus from "../../hooks/useStatus";
+import useForm from "../../hooks/useForm";
 
 function MovieSearch() {
-  const navigate = useNavigate();
   const location = useLocation();
   const query = new URLSearchParams(location.search).get("query");
 
   const [status, setStatus, { PENDING, RESOLVED, REJECTED, IDLE }] =
     useStatus();
-  const [userInput, setUserInput] = useState("");
+  const [userInput, handleChange, handleSubmit] = useForm();
   const [movies, setMovies] = useState(null);
 
   useEffect(() => {
@@ -28,17 +28,6 @@ function MovieSearch() {
         setStatus(REJECTED);
       });
   }, [query]);
-
-  function handleChange({ currentTarget }) {
-    const currentUserInput = currentTarget.value;
-    setUserInput(currentUserInput);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    navigate(`/movies/?query=${userInput}`);
-    setUserInput("");
-  }
 
   const searchResults = movies?.map((movies) => (
     <li key={movies.id}>

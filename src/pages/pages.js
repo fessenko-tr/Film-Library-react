@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
-const MainPage = lazy(() => import("./pages/MainPage/"));
-const DetailedMoviePage = lazy(() => import("./pages/DetailedMoviePage/"));
-const MoviesPage = lazy(() => import("./pages/MoviesPage/"));
+const MainPage = lazy(() => import("./MainPage"));
+const DetailedMoviePage = lazy(() => import("./DetailedMoviePage"));
+const MoviesPage = lazy(() => import("./MoviesPage"));
 
 function MainPages() {
   return (

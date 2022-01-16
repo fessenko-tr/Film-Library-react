@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import TMDBFetcher from "../../api/tmdbApi";
 import useStatus from "../../hooks/useStatus";
 import useForm from "../../hooks/useForm";
+import MovieList from "../MovieList/";
 
 function MovieSearch() {
   const location = useLocation();
@@ -29,14 +30,6 @@ function MovieSearch() {
       });
   }, [query]);
 
-  const searchResults = movies?.map((movies) => (
-    <li key={movies.id}>
-      <Link to={String(movies.id)}>
-        <p> {movies.title}</p>
-      </Link>
-    </li>
-  ));
-
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -46,12 +39,10 @@ function MovieSearch() {
       {status === IDLE && <p>The best movie is waiting to be found</p>}
       {status === PENDING && <p>Your request is being processed</p>}
       {status === REJECTED && <p>Sorry, something went wrong, try again</p>}
-      {status === RESOLVED && searchResults.length !== 0 && (
-        <ul>{searchResults}</ul>
+      {status === RESOLVED && movies.length !== 0 && (
+        <MovieList list={movies} />
       )}
-      {status === RESOLVED && searchResults.length === 0 && (
-        <p>Nothing is found</p>
-      )}
+      {status === RESOLVED && movies.length === 0 && <p>Nothing is found</p>}
     </>
   );
 }

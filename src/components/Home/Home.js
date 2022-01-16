@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import TMDBFetcher from "../../api/tmdbApi";
 import useStatus from "../../hooks/useStatus";
+import MovieList from "../MovieList/";
 
 function Home() {
   const [status, setStatus, { PENDING, RESOLVED, REJECTED }] = useStatus();
@@ -19,20 +19,12 @@ function Home() {
       });
   }, []);
 
-  const trendingMovies = trending?.map((movie) => (
-    <li key={movie.id}>
-      <Link to={`/movies/${movie.id}`}>
-        {movie.title || movie.original_name}
-      </Link>
-    </li>
-  ));
-
   return (
     <>
       <h1>Trending today</h1>
       {status === PENDING && <p>Loading Trending Movies!...</p>}
       {status === REJECTED && <p>Something went wrong sorry</p>}
-      {status === RESOLVED && <ul>{trendingMovies}</ul>}
+      {status === RESOLVED && <MovieList list={trending} linkTo="/movies/" />}
     </>
   );
 }

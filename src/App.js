@@ -1,12 +1,12 @@
 import "./App.css";
-import MainRoutes from "./pages";
+import MainPages from "./pages";
 import MainNav from "./components/MainNav";
 
 function App() {
   return (
     <>
       <MainNav />
-      <MainRoutes />
+      <MainPages />
     </>
   );
 }

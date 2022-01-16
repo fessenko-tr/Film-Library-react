@@ -5,7 +5,7 @@ const MainPage = lazy(() => import("./pages/MainPage/"));
 const DetailedMoviePage = lazy(() => import("./pages/DetailedMoviePage/"));
 const MoviesPage = lazy(() => import("./pages/MoviesPage/"));
 
-function MainRoutes() {
+function MainPages() {
   return (
     <Suspense fallback={<p>Loading</p>}>
       <Routes>
@@ -18,4 +18,4 @@ function MainRoutes() {
   );
 }
 
-export default MainRoutes;
+export default MainPages;

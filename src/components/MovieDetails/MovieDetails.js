@@ -1,7 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import s from "./MovieDetails.module.css";
 import TMDBFetcher from "../../api/tmdbApi";
 import useStatus from "../../hooks/useStatus";
 // const controller = new AbortController();
@@ -9,7 +7,6 @@ import useStatus from "../../hooks/useStatus";
 function MovieDetails({ id }) {
   const [status, setStatus, { PENDING, RESOLVED, REJECTED }] = useStatus();
   const [movieById, setMovieById] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     setStatus(PENDING);
@@ -23,19 +20,12 @@ function MovieDetails({ id }) {
       });
   }, []);
 
-  function goBack() {
-    navigate(-1);
-  }
-
   return (
     <>
-      <button className={s.btn} onClick={goBack}>
-        Go back
-      </button>
       {status === PENDING && <p>Your request is being processed</p>}
       {status === REJECTED && <p>Sorry, something went wrong, try again</p>}
       {status === RESOLVED && (
-        <>
+        <div>
           <img
             width="300"
             height="400"
@@ -52,7 +42,7 @@ function MovieDetails({ id }) {
               <li key={el.id}>{el.name}</li>
             ))}
           </ul>
-        </>
+        </div>
       )}
     </>
   );

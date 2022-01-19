@@ -21,7 +21,7 @@ function Reviews({ id }) {
 
   const reviewsList = reviews?.map((review) => (
     <li key={review.id}>
-      <p>{`Author: ${review.author}`}</p>
+      <h5>{`Author: ${review.author}`}</h5>
       <p>{review.content}</p>
     </li>
   ));

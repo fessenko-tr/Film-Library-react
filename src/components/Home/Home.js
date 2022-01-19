@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import TMDBFetcher from "../../api/tmdbApi";
 import useStatus from "../../hooks/useStatus";
 import MovieList from "../MovieList/";
+import s from "./Home.module.css";
+import { Spin } from "antd";
 
 function Home() {
   const [status, setStatus, { PENDING, RESOLVED, REJECTED }] = useStatus();
   const [trending, setTrending] = useState(null);
-
+  const { HomeContainer, HomeHeader } = s;
   useEffect(() => {
     setStatus(PENDING);
     TMDBFetcher.fetchTending()
@@ -20,12 +22,12 @@ function Home() {
   }, []);
 
   return (
-    <>
-      <h1>Trending today</h1>
-      {status === PENDING && <p>Loading Trending Movies!...</p>}
+    <div className={HomeContainer}>
+      <h1 className={HomeHeader}>Trending today</h1>
+      {status === PENDING && <Spin />}
       {status === REJECTED && <p>Something went wrong sorry</p>}
       {status === RESOLVED && <MovieList list={trending} linkTo="/movies/" />}
-    </>
+    </div>
   );
 }
 

@@ -1,24 +1,24 @@
 import { NavLink } from "react-router-dom";
 import s from "./MainNav.module.css";
+import { Header } from "antd/lib/layout/layout";
+import { Button } from "antd";
+import { Space } from "antd";
 
 function MainNav() {
-  const { ActiveLink } = s;
-
+  const { NavHeader } = s;
   return (
-    <>
-      <NavLink
-        className={({ isActive }) => (isActive ? ActiveLink : "")}
-        to="/"
-      >
-        Home
-      </NavLink>
-      <NavLink
-        className={({ isActive }) => (isActive ? ActiveLink : "")}
-        to="/movies"
-      >
-        Movies
-      </NavLink>
-    </>
+    <Header className={NavHeader}>
+      <div>
+        <Space size="large">
+          <NavLink to="/">
+            <Button type="default">Home</Button>
+          </NavLink>
+          <NavLink to="/movies">
+            <Button type="default">Movies</Button>
+          </NavLink>
+        </Space>
+      </div>
+    </Header>
   );
 }
 

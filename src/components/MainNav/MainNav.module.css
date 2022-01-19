@@ -1,5 +1,5 @@
-.ActiveLink {
-  margin: 5px;
-  color: red;
-  text-decoration: underline;
+.NavHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
